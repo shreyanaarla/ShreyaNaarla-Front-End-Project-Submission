@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { SalesData } from '../../types/sales';
-import parseCSV from '../../utils/parseCSV';
+import { parseCSV } from '../../utils/parseCSV';
 
 const SalesChart: React.FC = () => {
     const [salesData, setSalesData] = useState<SalesData[]>([]);
     
     useEffect(() => {
         const fetchData = async () => {
-            const data = await parseCSV('/data/sales_data.csv');
-            setSalesData(data);
+            const rawData = await parseCSV('/data/sales_data.csv');
+            // Map 'sales' to 'salesAmount'
+            const mappedData = rawData.map((item: { year: number; sales: number }) => ({
+                year: item.year,
+                salesAmount: item.sales,
+            }));
+            setSalesData(mappedData);
         };
         fetchData();
     }, []);
@@ -19,7 +24,7 @@ const SalesChart: React.FC = () => {
         datasets: [
             {
                 label: 'Sales Amount',
-                data: salesData.map(data => data.amount),
+                data: salesData.map(data => data.salesAmount),
                 backgroundColor: 'rgba(75, 192, 192, 0.6)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
