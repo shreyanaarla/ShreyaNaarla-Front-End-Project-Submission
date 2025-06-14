@@ -1,5 +1,10 @@
 {
   "devDependencies": {
     "@types/next": "^8.0.7"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.0",
+    "react-chartjs-2": "^5.3.0",
+    "recharts": "^2.15.3"
   }
 }

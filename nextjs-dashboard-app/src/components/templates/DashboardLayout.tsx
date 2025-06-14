@@ -9,9 +9,6 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
             <main className="flex-grow p-4">
                 {children}
             </main>
-            <footer className="bg-gray-800 text-white p-4 text-center">
-                <p>&copy; {new Date().getFullYear()} Your Company</p>
-            </footer>
         </div>
     );
 };
